@@ -1,0 +1,39 @@
+<div class="container-fluid">
+    <app-page-title title="users" [breadcrumbItems]="breadCrumbItems"></app-page-title>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="mb-5">Add Users</h4>
+                    <form class="needs-validation" (ngSubmit)="validSubmit()" [formGroup]="userForm">
+                        <div class="form-group">
+                            <label>E-Mail</label>
+                            <div>
+                                <input type="email" class="form-control" formControlName="email"
+                                    [ngClass]="{'is-invalid': submit && form.email.errors}"
+                                    placeholder="Enter a valid email id" onfocus="this.placeholder = ''"
+                                    onblur="this.placeholder = 'Enter a valid email'"/>
+                                <div *ngIf="submit && form.email.errors" class="invalid-feedback">
+                                    <span *ngIf="form.email.errors.required">This value is required.</span>
+                                    <span *ngIf="form.email.errors.pattern">This value should be a valid email.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mb-4">
+                            <label for="status-input">Permission</label>
+                            <select class="custom-select" id="privilege_id" formControlName="privilege_id">
+                                <option value="1">edit:read:manage:delete</option>
+                                <option value="2">edit:read:delete</option>
+                                <option value="3">edit:read</option>
+                                <option value="4">read</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-danger float-right ml-3" [routerLink]="['/users/manage']"type="submit">Cancel</button>
+                        <button (click)="newUser()" class="btn btn-success float-right" type="submit">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -13,7 +13,7 @@ import sys
 
 def get_project_items():
     log("User requested list projects", "MEDIUM", "PASS")
-    return Project.query.paginate(1, 500, False)
+    return Project.query.paginate(1, 2500, False)
 
 
 def new_project(user_id, data):
@@ -31,6 +31,21 @@ def new_project(user_id, data):
     return {'project_id': result.id, 'message': 'Project successfully created'}
 
 
+def update_project(id, data):
+    log("User requested update a specific project", "LOW", "PASS")
+    try:
+        project = Project.query.filter(Project.id == id).first()
+        project.name = data.get('name')
+        project.version = data.get('version')
+        project.description = data.get('description')
+        db.session.add(project)
+        db.session.commit()
+    except:
+        db.session.rollback()
+        raise
+    return {'message': 'project successfully updated'} 
+
+
 def delete_project(project_id):
     log("User deleted project", "MEDIUM", "PASS")
     try:
@@ -41,6 +56,11 @@ def delete_project(project_id):
         db.session.rollback()
         return abort(400, 'Project not deleted')
     return {'message': 'Project successfully deleted'}
+
+
+def get_project_item(project_id):
+    log("User requested specific project stats", "MEDIUM", "PASS")
+    return Project.query.filter(Project.id == project_id).first()
 
 
 def stats_project(project_id):

@@ -1,0 +1,157 @@
+<div class="container-fluid">
+  <app-page-title title="Projects" [breadcrumbItems]="breadCrumbItems"></app-page-title>
+
+  <div class="card">
+    <div class="card-body">
+      <div class="row mb-3">
+        <div class="col-7">
+          <div class="search-box mb-2 d-inline-block">
+            <div class="position-relative">
+              <input class="form-control" [(ngModel)]="queryString" id="search" name="search"
+                placeholder="Search Projects" onfocus="this.placeholder = ''"
+                onblur="this.placeholder = 'Search Projects'" />
+              <i class="bx bx-search-alt search-icon"></i>
+            </div>
+          </div>
+        </div>
+        <div class="col-5">
+          <div class="float-right">
+            <button *ngIf="priv.includes('manage')" type="button" [routerLink]="['/projects/create']" class="btn btn-primary mb-2"
+              joyrideStep="createProject" title="New project" stepPosition="bottom" [stepContent]="createProject">New
+              Project</button>
+          </div>
+        </div>
+        <!-- end col-->
+      </div>
+      <div class="dropdown-divider"></div>
+      <div class="row">
+        <div class="col-lg-12">
+          <div joyrideStep="projectName" title="Projects" [stepContent]="projectName">
+            <div class="table-responsive">
+              <table class="table project-list-table table-nowrap table-centered table-borderless table-hover">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col" class="text-center" style="width: 100px">#</th>
+                    <th scope="col" class="text-center" joyrideStep="startProject" title="Start expert system for project"
+                      [stepContent]="startProject">Projects</th>
+                    <th scope="col" class="text-center">Description</th>
+                    <th scope="col" class="text-center">Created Date</th>
+                    <th scope="col" class="text-center">Project Version</th>
+                    <th *ngIf="priv.includes('manage')" scope="col" class="text-center" joyrideStep="updateProject" title="Start expert system for project"
+                      [stepContent]="updateProject">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                <!-- Load Spinner -->
+                <ngx-spinner [fullScreen]="true" type="ball-clip-rotate-multiple" size="medium">
+                  <p class="loading">Loading, Please Wait...</p>
+                </ngx-spinner>
+                  <tr *ngFor="let item of projectData.items | stringfilter:queryString ">
+                    <td class="text-center">{{item.id}}</td>
+                    <td class="text-center">
+                      <h5 class="text-truncate font-size-14 mt-1">
+                        <a [routerLink]="['/projects/view', item.id]" class="">{{item.name}}</a>
+                      </h5>
+                    </td>
+                    <td class="text-center">{{item.description}}</td>
+                    <td class="text-center">{{item.timestamp}}</td>
+                    <td class="text-center">{{item.version}}</td>
+                    <td *ngIf="priv.includes('manage')" class="text-center">
+                      <div class="dropdown" ngbDropdown placement="bottom-right">
+                        <a href="javascript: void(0);" class="dropdown-toggle card-drop" data-toggle="dropdown"
+                          ngbDropdownToggle aria-expanded="false">
+                          <i class="mdi mdi-dots-horizontal font-size-18"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-right" ngbDropdownMenu>
+                          <li>
+                            <a class="dropdown-item" role="button" [routerLink]="['/projects/update', item.id]">
+                              <i class="fas fa-pencil-alt text-success mr-1"></i> Edit</a>
+                          </li>
+                          <li>
+                            <a class="dropdown-item" role="button" (click)="projectModal(deleteProjectModal)">
+                              <i class="fas fa-trash-alt text-danger mr-1"></i> Delete</a>
+                          </li>
+                        </ul>
+                      </div>
+                    </td>
+                    <!-- Project Delete Modal -->
+                    <ng-template #deleteProjectModal let-modal>
+                      <div class="modal-header">
+                        <h5 class="modal-title mt-0">Delete Project</h5>
+                        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Close click')">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <form (ngSubmit)="onSubmit()">
+                          <div class="form-group">
+                            <label for="delete">Type <b class="text-danger">DELETE</b> to delete the Project
+                              item</label>
+                            <input autocomplete="off" [(ngModel)]="delete" type="text" class="form-control" id="delete"
+                              name="delete" placeholder="Type DELETE" onfocus="this.placeholder = ''"
+                              onblur="this.placeholder = 'Type DELETE'">
+                          </div>
+                          <button (click)="deleteProject(item.id);modal.dismiss('Close click')" type="submit"
+                            class="btn btn-primary">Delete</button>
+                        </form>
+                      </div>
+                    </ng-template>
+                    <!-- END Project Delete Modal -->
+
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end row -->
+    </div>
+  </div>
+
+  <!--<div class="row">
+      <div class="col-12">
+        <div class="text-center my-3">
+          <a href="javascript:void(0);" class="text-success">
+             Load more
+          </a>
+        </div>
+      </div>
+    </div>-->
+  <!-- end row -->
+</div>
+
+
+<ng-template #projectName>
+  <div class="card p-0">
+    <div class="card-body text-center px-0 mr-2 ml-2">
+      <h6>SKF has by default a set of projects already created for you, these we call the Design pattern projects.
+        Also the new projects you will create will be listed over here.</h6>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #createProject>
+  <div class="card p-0">
+    <div class="card-body text-center px-0 mr-2 ml-2">
+      <h6>Here you can create your own project and start the expert system wizard of SKF to gather the requirements
+        needed for your project.</h6>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #startProject>
+  <div class="card p-0">
+    <div class="card-body text-center px-0 mr-2 ml-2">
+      <h6>Here you can click on the project to retrieve or start gathering the security requirements.</h6>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #updateProject>
+  <div class="card p-0">
+    <div class="card-body text-center px-0 mr-2 ml-2">
+      <h6>Here you can update the basic information of the project.</h6>
+    </div>
+  </div>
+</ng-template>

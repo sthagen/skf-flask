@@ -15,7 +15,7 @@ class TestRestPlusApi(unittest.TestCase):
         with app.app_context():
             clean_db()
             update_db()
-            chatbot_tools.init_dataset()
+            #chatbot_tools.init_dataset()
             settings.TESTING = True
         app.app_context().push()
 
@@ -126,7 +126,7 @@ class TestRestPlusApi(unittest.TestCase):
     def test_login_list(self):
         """Test if the login list call is working"""
         jwt = self.login('admin', 'admin')
-        headers = {'Authorization': jwt}
+        headers = {'content-type': 'application/json', 'Authorization': jwt}
         response = self.client.get('/api/user/list', headers=headers)
         self.assertEqual(response.status_code, 200)
         response_dict = json.loads(response.data.decode('utf-8'))
@@ -187,8 +187,8 @@ class TestRestPlusApi(unittest.TestCase):
         """Test if the update specific checklist item call is working"""
         jwt = self.login('admin', 'admin') 
         headers = {'content-type': 'application/json', 'Authorization': jwt}
-        payload = {"content": "This is a updated checklist item", "kb_id": 272, "maturity": 2, "include_always": "False", "question_id": 1, "cwe": 22 }
-        response = self.client.put('/api/checklist/update/item/1.1.1/type/1', data=json.dumps(payload), headers=headers)
+        payload = {"content": "This is a updated checklist item", "kb_id": 319, "checklist_id": "1.9.1", "maturity": 2, "include_always": "False", "question_id": 8, "add_resources": "http://google.com" }
+        response = self.client.put('/api/checklist/update/item/19', data=json.dumps(payload), headers=headers)
         self.assertEqual(response.status_code, 200)
         response_dict = json.loads(response.data.decode('utf-8'))
         self.assertEqual(response_dict['message'], "Checklist item successfully updated")
@@ -198,7 +198,7 @@ class TestRestPlusApi(unittest.TestCase):
         """Test if the get all checklist types call is working"""
         jwt = self.login('admin', 'admin') 
         headers = {'content-type': 'application/json', 'Authorization': jwt}
-        response = self.client.get('/api/checklist/types/1', headers=headers)
+        response = self.client.get('/api/checklist_types/types/1', headers=headers)
         self.assertEqual(response.status_code, 200)
         response_dict = json.loads(response.data.decode('utf-8'))
         self.assertEqual(response_dict['items'][0]['title'], 'Architecture, Design and Threat Modeling Requirements')
@@ -219,8 +219,8 @@ class TestRestPlusApi(unittest.TestCase):
         """Test if the update checklist type call is working"""
         jwt = self.login('admin', 'admin') 
         headers = {'content-type': 'application/json', 'Authorization': jwt}
-        payload = {"description": "This is a checklist category description update", "name": "Custom security category update"}
-        response = self.client.put('/api/checklist_category/update/2', data=json.dumps(payload), headers=headers)
+        payload = {"name": "Custom security category update", "description": "This is a checklist category description update"}
+        response = self.client.put('/api/checklist_category/update/1', data=json.dumps(payload), headers=headers)
         self.assertEqual(response.status_code, 200)
         response_dict = json.loads(response.data.decode('utf-8'))
         self.assertEqual(response_dict['message'], "Checklist category successfully updated")
@@ -261,10 +261,10 @@ class TestRestPlusApi(unittest.TestCase):
         jwt = self.login('admin', 'admin') 
         headers = {'content-type': 'application/json', 'Authorization': jwt}
         payload = {"description": "This is a checklist type description", "name": "Custom security list", "visibility": 1}
-        response = self.client.put('/api/checklist/create/type/1', data=json.dumps(payload), headers=headers)
+        response = self.client.put('/api/checklist_category/new', data=json.dumps(payload), headers=headers)
         self.assertEqual(response.status_code, 200)
         response_dict = json.loads(response.data.decode('utf-8'))
-        self.assertEqual(response_dict['message'], "Checklist type successfully created")
+        self.assertEqual(response_dict['message'], "Checklist category successfully created")
 
 
     def test_update_checklist_type(self):
@@ -272,7 +272,7 @@ class TestRestPlusApi(unittest.TestCase):
         jwt = self.login('admin', 'admin') 
         headers = {'content-type': 'application/json', 'Authorization': jwt}
         payload = {"description": "This is a checklist type description update", "name": "Custom security list new", "visibility": 1}
-        response = self.client.put('/api/checklist/update/type/1', data=json.dumps(payload), headers=headers)
+        response = self.client.put('/api/checklist_types/update/1', data=json.dumps(payload), headers=headers)
         self.assertEqual(response.status_code, 200)
         response_dict = json.loads(response.data.decode('utf-8'))
         self.assertEqual(response_dict['message'], "Checklist item successfully updated")
@@ -282,7 +282,7 @@ class TestRestPlusApi(unittest.TestCase):
         """Test if the delete checklist type call is working"""
         jwt = self.login('admin', 'admin') 
         headers = {'content-type': 'application/json', 'Authorization': jwt}
-        response = self.client.delete('/api/checklist/delete/type/2', headers=headers)
+        response = self.client.delete('/api/checklist_types/delete/20', headers=headers)
         self.assertEqual(response.status_code, 200)
         response_dict = json.loads(response.data.decode('utf-8'))
         self.assertEqual(response_dict['message'], "Checklist type successfully deleted")
@@ -292,8 +292,8 @@ class TestRestPlusApi(unittest.TestCase):
         """Test if the create new checklist item call is working"""
         jwt = self.login('admin', 'admin') 
         headers = {'content-type': 'application/json', 'Authorization': jwt}
-        payload = {"content": "This is a new checklist item", "maturity": 1, "kb_id": 12, "include_always": "False", "question_id": 0, "cwe": 0 }
-        response = self.client.put('/api/checklist/new/item/29.1/type/1', data=json.dumps(payload), headers=headers)
+        payload = {"content": "This is a new checklist item", "maturity": 1, "kb_id": 12, "include_always": "False", "question_id": 0, "checklist_id": "14.5.41", "add_resources": "http://test.com" }
+        response = self.client.put('/api/checklist/new/item/type/13', data=json.dumps(payload), headers=headers)
         self.assertEqual(response.status_code, 200)
         response_dict = json.loads(response.data.decode('utf-8'))
         self.assertEqual(response_dict['message'], "Checklist item successfully created")
@@ -303,7 +303,7 @@ class TestRestPlusApi(unittest.TestCase):
         """Test if the delete a checklist item call is working"""
         jwt = self.login('admin', 'admin') 
         headers = {'content-type': 'application/json', 'Authorization': jwt}
-        response = self.client.delete('/api/checklist/delete/item/1.1.2/type/1', headers=headers)
+        response = self.client.delete('/api/checklist/delete/item/31', headers=headers)
         self.assertEqual(response.status_code, 200)
         response_dict = json.loads(response.data.decode('utf-8'))
         self.assertEqual(response_dict['message'], "Checklist item successfully deleted")
@@ -321,7 +321,7 @@ class TestRestPlusApi(unittest.TestCase):
 
     def test_get_checklist_item_10(self):
         """Test if the get specific checklist item call is working"""
-        response = self.client.get('/api/checklist/item/1.0/type/1')
+        response = self.client.get('/api/checklist/item/1')
         self.assertEqual(response.status_code, 200)
         response_dict = json.loads(response.data.decode('utf-8'))
         self.assertEqual(response_dict['checklist_id'], '1.0')
@@ -356,15 +356,15 @@ class TestRestPlusApi(unittest.TestCase):
         response = self.client.get('/api/kb/items/1')
         self.assertEqual(response.status_code, 200)
         response_dict = json.loads(response.data.decode('utf-8'))
-        self.assertEqual(response_dict['items'][0]['title'], "use me for a header")
+        self.assertEqual(response_dict['items'][0]['title'], "empty control")
 
 
     def test_get_kb_item_10(self):
         """Test if the get specific kb item call is working"""
-        response = self.client.get('/api/kb/10')
+        response = self.client.get('/api/kb/9')
         self.assertEqual(response.status_code, 200)
         response_dict = json.loads(response.data.decode('utf-8'))
-        self.assertEqual(response_dict['title'], "External DTD parsing")
+        self.assertEqual(response_dict['title'], "J2EE Misconfiguration: Weak Access Permissions for EJB Methods")
 
 
     def test_update_kb(self):
@@ -379,7 +379,7 @@ class TestRestPlusApi(unittest.TestCase):
         response = self.client.get('/api/kb/items/1')
         self.assertEqual(response.status_code, 200)
         response_dict = json.loads(response.data.decode('utf-8'))
-        self.assertEqual(response_dict['items'][0]['title'], "Unit test title update")
+        self.assertEqual(response_dict['items'][0]['title'], "empty control")
 
 
     def test_new_kb(self):
@@ -397,7 +397,7 @@ class TestRestPlusApi(unittest.TestCase):
     def test_create_project(self):
         """Test if the create new project call is working"""
         jwt = self.login('admin', 'admin')        
-        payload = {'description': 'Unit test description project', 'name': 'Unit test name project', 'checklist_type': 1, 'version': 'version 1.0'}
+        payload = {'description': 'Unit test description project', 'name': 'Unit test name project', 'version': 'version 1.0'}
         headers = {'content-type': 'application/json', 'Authorization': jwt}
         response = self.client.put('/api/project/new', data=json.dumps(payload), headers=headers)
         self.assertEqual(response.status_code, 200)
@@ -421,7 +421,7 @@ class TestRestPlusApi(unittest.TestCase):
         response = self.client.get('/api/project/items', headers=headers)
         self.assertEqual(response.status_code, 200)
         response_dict = json.loads(response.data.decode('utf-8'))
-        self.assertEqual(response_dict['items'][0]['name'], "Unit test name project")
+        self.assertEqual(response_dict['items'][0]['name'], "Design Patterns ASVS LvL 2")
 
 
     def test_delete_project_item(self):
@@ -468,7 +468,7 @@ class TestRestPlusApi(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         response_dict = json.loads(response.data.decode('utf-8'))
         self.assertEqual(response_dict['message'], "Sprint successfully created")
-        response = self.client.get('/api/sprint/2', headers=headers)
+        response = self.client.get('/api/sprint/44', headers=headers)
         self.assertEqual(response.status_code, 200)
         response_dict = json.loads(response.data.decode('utf-8'))
         self.assertEqual(response_dict['name'], "Unit test name sprint")
@@ -477,13 +477,13 @@ class TestRestPlusApi(unittest.TestCase):
     def test_update_sprint_item(self):
         """Test if the sprint update call is working"""
         jwt = self.login('admin', 'admin') 
-        payload = {'description': 'Unit test description sprint update', 'name': 'Unit test name sprint update', 'project_id': 7}
+        payload = {'description': 'Unit test description sprint update', 'name': 'Unit test name sprint update', 'project_id': 3}
         headers = {'content-type': 'application/json', 'Authorization': jwt}
-        response = self.client.put('/api/sprint/update/2', data=json.dumps(payload), headers=headers)
+        response = self.client.put('/api/sprint/update/44', data=json.dumps(payload), headers=headers)
         self.assertEqual(response.status_code, 200)
         response_dict = json.loads(response.data.decode('utf-8'))
         self.assertEqual(response_dict['message'], "Sprint successfully updated")
-        response = self.client.get('/api/sprint/2', headers=headers)
+        response = self.client.get('/api/sprint/44', headers=headers)
         self.assertEqual(response.status_code, 200)
         response_dict = json.loads(response.data.decode('utf-8'))
         self.assertEqual(response_dict['name'], "Unit test name sprint update")
@@ -533,7 +533,7 @@ class TestRestPlusApi(unittest.TestCase):
         """Test if the delete project item fail call is working"""
         jwt = self.login('admin', 'admin') 
         headers = {'content-type': 'application/json', 'Authorization': jwt}
-        response = self.client.delete('/api/project/delete/3', headers=headers)
+        response = self.client.delete('/api/project/delete/1', headers=headers)
         self.assertEqual(response.status_code, 400)
 
 

@@ -11,7 +11,14 @@ import sys
 def get_questions(checklists_type):
     log("User requested list of questions", "LOW", "PASS")
     val_num(checklists_type)
-    result = Question.query.filter(Question.checklist_type == checklists_type).paginate(1, 500, False)
+    result = Question.query.filter(Question.checklist_type == checklists_type).paginate(1, 2500, False)
+    return result
+
+
+def get_question_by_id(question_id):
+    log("User requested question by id", "LOW", "PASS")
+    val_num(question_id)
+    result = Question.query.filter(Question.id == question_id).first()
     return result
 
 def store_questions(checklist_type, maturity, data):
@@ -79,12 +86,14 @@ def store_question_results_include_always(checklists, project_id, sprint_id, che
     except:
         abort(400, "error storing checklist results - include always")
 
+
 def new_question(data):
     log("User created new sprint question item", "MEDIUM", "PASS")
     sprint = Question(data.get('question'), data.get('checklist_type'))
     db.session.add(sprint)
     db.session.commit()
     return {'message': 'New Question successfully created'}
+
 
 def update_question(id_question, data):
     log("User updated sprint question item", "MEDIUM", "PASS")
@@ -94,6 +103,7 @@ def update_question(id_question, data):
     db.session.add(sprint)
     db.session.commit()
     return {'message': 'Question successfully updated'}
+
 
 def delete_question(id_question):
     log("User deleted question", "MEDIUM", "PASS")

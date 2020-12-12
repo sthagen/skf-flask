@@ -1,0 +1,80 @@
+<div class="container-fluid">
+  <app-page-title title="Features" [breadcrumbItems]="breadCrumbItems"></app-page-title>
+  <div class="row">
+    <div class="col lg 12">
+      <a routerLink="/projects/manage" class="btn text-primary d-sm-inline-block btn-link"> <i class="mdi mdi-arrow-left mr-1"></i> go back</a>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-lg-12">
+
+      <!-- Content Body -->
+
+      <div class="card">
+        <div class="card-body">
+          <div class="row mb-5">
+            <div class="col-6">
+              <div class="search-box mb-2 d-inline-block">
+                <div class="position-relative">
+                  <input type="text" class="form-control" [(ngModel)]="queryString" id="search" name="search" 
+                  placeholder="Search..." onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search...'"/>
+                  <i class="bx bx-search-alt search-icon"></i>
+                </div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="text-right">
+                <button type="button" (click)="projectCreate()" class="btn btn-primary mb-2" 
+                joyrideStep="projectRequirements" title="Project wizard" [stepContent]="projectRequirements">Generate requirements</button>
+              </div>
+            </div>
+            <!-- end col-->
+          </div>
+          <div class="row">
+            <div *ngFor="let item of sprintData | stringfilter:queryString;" class="col-xl-4 col-sm-6 mb-4">
+              <div class="card card-light">
+                <div class="card-body">
+                  <div class="media">
+                    <div class="media-body overflow-hidden">
+                      <h5 class="text-truncate font-size-15">
+                        <a class="text-dark">[{{item.sprint_items_total}}] {{item.title}}</a>
+                      </h5>
+                      <p class="text-dark mb-4">{{item.sprint_desc}}</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="px-4 py-3 border-top">
+                  <ul class="list-inline mb-0">
+                    <li class="list-inline-item mr-3 float-right">
+                      <button joyrideStep="projectRequirementsResults" title="Wizard results" [stepContent]="projectRequirementsResults"
+                      class="btn-sm btn-primary" (click)="onView(item.sprint_id)">View</button>
+                    </li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Content Body Ends-->
+    </div>
+  </div>
+  <!-- end row -->
+</div>
+
+<ng-template #projectRequirements>
+  <div class="card p-0">
+    <div class="card-body text-center px-0 mr-2 ml-2">
+      <h6>Start here the expert wizard of SKF to gather the right set of security controls for your sprint/features of your project you are doing.</h6>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #projectRequirementsResults>
+  <div class="card p-0">
+    <div class="card-body text-center px-0 mr-2 ml-2">
+      <h6>Click here to see the results of the expert wizard correlation.</h6>
+    </div>
+  </div>
+</ng-template>

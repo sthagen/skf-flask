@@ -1,14 +1,17 @@
 dist: trusty
+  
+sudo: false
 
 addons:
   chrome: stable
   
 language: python
 
-sudo: false
-
 python:
   - "3.6"
+
+env:
+  - SKF_JWT_SECRET=12345
 
 before_install:
   - export CHROME_BIN=chromium-browser
@@ -20,7 +23,7 @@ install:
   - pip3 install coverage==4.5.4
   - pip3 install python-coveralls
   - pip3 install -r requirements.txt
-  - cd Angular
+  - cd Angular2
   - npm install
   - npm install -g @angular/cli
   - npm install -g codecov
@@ -35,8 +38,7 @@ before_script:
   - export PYTHONPATH=.:$PYTHONPATH
 
 script:
-  - snyk monitor
-
+#  - snyk monitor
 #  - pwd
 #  - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then cd /home/travis/build/blabla1337/skf-flask/Angular; npm test; fi'
 #  - 'if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then cd /home/travis/build/blabla1337/skf-flask/Angular; ng test --code-coverage; fi'

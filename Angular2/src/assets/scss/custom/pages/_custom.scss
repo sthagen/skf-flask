@@ -1,0 +1,90 @@
+// custom scss
+//  form wizard
+aw-wizard {
+    .steps-indicator{
+        .label {
+            color: $text-muted !important;
+        }
+        .current {
+            .step-indicator{
+                color: $primary !important;
+                border-color: $primary !important;
+            }
+        }
+    }
+}
+
+// ngx-joyride (tour)
+
+.joyride-step__container {
+    border-radius: 10px !important;
+    box-shadow: 0 .125rem .25rem rgba($black, .075) !important;
+    border-width: 1px !important;
+
+    .joyride-button {
+        border-radius: 5px !important;
+        background-color: #8184B2 !important;
+        padding: 0.25rem 0.5rem !important;
+        font-size: 0.7rem !important;
+        line-height: 1.5 !important;
+        border-radius: 0.2rem !important;
+        margin-top: 10px !important;
+    }
+
+    .joyride-button:hover {
+        border-radius: 5px !important;
+        background-color: #fff !important;
+        border-color: #8184B2 !important;
+        padding: 0.25rem 0.5rem !important;
+        font-size: 0.7rem !important;
+        line-height: 1.5 !important;
+        border-radius: 0.2rem !important;
+        margin-top: 10px !important;
+    }
+
+    .joyride-step__header {
+        padding: 0 !important;
+    }
+
+    .joyride-step__body {
+        padding: 10px 0 0 0 !important;
+    }
+
+    .joyride-step__footer{
+        .joyride-step__buttons-container {
+            text-align: center !important;
+        }
+    }
+}
+
+@media (max-width:320px) {
+    aw-wizard-navigation-bar ul.steps-indicator li a .label{
+        display: none !important;
+    }
+}
+@media (max-width:481px) {
+    aw-wizard-navigation-bar ul.steps-indicator li a .label{
+        display: none !important;
+    }
+}
+@media (max-width:641px) {
+    aw-wizard-navigation-bar ul.steps-indicator li a .label{
+        display: none !important;
+    }
+}
+
+.swal2-content {
+    font-size: 0.95em
+}
+
+.check-drop {
+    background-color: $card-bg !important;
+}
+
+.btn-card {
+    background-color: $light !important;
+}
+
+.card-header {
+    background-color: $light;
+}

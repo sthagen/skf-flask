@@ -10,7 +10,6 @@ from skf.api.security import log, val_num, val_alpha, val_alpha_num, val_alpha_n
 
 ns = api.namespace('code', description='Operations related to code example items')
 
-
 @ns.route('/update/<int:id>')
 @api.doc(params={'id': 'The code item id'})
 @api.response(404, 'Validation error', message)
@@ -22,13 +21,12 @@ class CodeItemUpdate(Resource):
     def put(self, id):
         """
         Update a code example item.
-        * Privileges required: **manage**
+        * Privileges required: **edit**
         """
         data = request.json
         val_alpha_num_special(data.get('title'))
-        val_alpha_num(data.get('code_lang'))
         val_num(id)
-        validate_privilege(self, 'manage')
+        validate_privilege(self, 'edit')
         result = update_code_item(id, data)
         return result, 200, security_headers()
  

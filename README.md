@@ -2,16 +2,16 @@
 [![SKF Logo](https://www.securityknowledgeframework.org/img/banner-wiki-owasp.jpg)](https://www.securityknowledgeframework.org/) 
 
 <br>Project status details:<br>
-[![Build Travis CI Master](https://travis-ci.org/blabla1337/skf-flask.svg?branch=master)](https://travis-ci.org/blabla1337/skf-flask)
 [![Join the chat at https://gitter.im/Security-Knowledge-Framework/Lobby](https://badges.gitter.im/Security-Knowledge-Framework/Lobby.svg)](https://gitter.im/Security-Knowledge-Framework/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Join the chat at https://owasp.slack.com/messages/C0F7L9X6V](https://img.shields.io/badge/chat-on%20slack-blueviolet)](https://owasp.slack.com/messages/C0F7L9X6V)
 [![OWASP Flagship](https://img.shields.io/badge/owasp-flagship%20project-orange.svg)](https://www.owasp.org/index.php/OWASP_Security_Knowledge_Framework)
+[![OSSF Working group: Best Practices for Open Source Developers](https://img.shields.io/badge/OpenSSF-Learning%20Platform-orange)](https://openssf.org)
 
 <br>Quality testing:<br>
-[![Known Vulnerabilities](https://snyk.io/test/github/blabla1337/skf-flask/badge.svg)](https://snyk.io/test/github/blabla1337/skf-flask)
-[![Coverage Status](https://coveralls.io/repos/blabla1337/skf-flask/badge.svg?branch=master)](https://coveralls.io/repos/blabla1337/skf-flask/badge.svg?branch=master)
-[![Black Duck Security Risk](https://copilot.blackducksoftware.com/github/repos/blabla1337/skf-flask/branches/master/badge-risk.svg)](https://copilot.blackducksoftware.com/github/repos/blabla1337/skf-flask/branches/master)
-[![Requirements Status](https://requires.io/github/blabla1337/skf-flask/requirements.svg?branch=master)](https://requires.io/github/blabla1337/skf-flask/requirements/?branch=master)
+[![Build Travis CI Master](https://travis-ci.org/blabla1337/skf-flask.svg?branch=main)](https://travis-ci.org/blabla1337/skf-flask)
+[![Known Vulnerabilities](https://snyk.io/test/github/blabla1337/skf-flask/badge.svg?branch=main)](https://snyk.io/test/github/blabla1337/skf-flask?branch=main)
+[![Coverage Status](https://coveralls.io/repos/github/blabla1337/skf-flask/badge.svg?branch=master)](https://coveralls.io/github/blabla1337/skf-flask?branch=master)
+[![Requirements Status](https://requires.io/github/blabla1337/skf-flask/requirements.svg?branch=main)](https://requires.io/github/blabla1337/skf-flask/requirements/?branch=main)
 
 Security Knowledge Framework is an expert system application that uses the OWASP Application Security Verification Standard with detailed code examples (secure coding principles) to help developers in pre-development and post-development phases and create applications that are secure by design.
 
@@ -23,7 +23,6 @@ Security Knowledge Framework is an expert system application that uses the OWASP
 * [Usage](#usage)
 * [CI-Pipeline](#ci-pipeline)
 * [Development / Contributing](https://github.com/blabla1337/skf-flask/blob/master/CONTRIBUTING.md)
-* [Scrum Board](#scrum-board)
 * [License](#license)
 * [Contributors](#contributors)
 
@@ -39,11 +38,10 @@ The second stage is validating if the developer properly implemented different s
 
 ## <a name="installing"></a>Installing
 
-### [Local on premise installation how to](https://github.com/blabla1337/skf-flask/tree/master/installations/local)  
-### [Docker local installation how to](https://github.com/blabla1337/skf-flask/tree/master/installations/docker)  
 ### [Kubernetes installation how to](https://github.com/blabla1337/skf-flask/tree/master/installations/Kubernetes)  
-### [Azure installation how to](https://github.com/blabla1337/skf-flask/tree/master/installations/azure-deployment)  
-
+### [Bare metal / on premise installation how to](https://github.com/blabla1337/skf-flask/tree/master/installations/local)  
+### [Docker-compose local how to](https://github.com/blabla1337/skf-flask/tree/master/installations/docker)  
+### [SKF K8s Raspberry pi cluster how to](https://github.com/blabla1337/skf-flask/tree/master/installations/pi-cluster)  
 ### [SKF Chatbot installation how to](https://github.com/blabla1337/skf-bot)  
 
 ## <a name="updating-db"></a>Updating Database
@@ -156,10 +154,9 @@ Creates a nice badge for your website SSL/TLS security settings based on the Qua
 Licensed under the [creative commons](http://creativecommons.org/licenses/by-nd/3.0/nl/) license
 
 ## <a name="contributors"></a>Contributors
-- Lucas Luitjes
-- [Mattijs van Ommeren](https://twitter.com/alcyonsecurity)
 - [Glenn ten Cate](https://twitter.com/FooBar_testing_)
 - [Riccardo ten Cate](https://twitter.com/RiieCco)
+- [Mattijs van Ommeren](https://twitter.com/alcyonsecurity)
 - [Alexander Kaasjager](https://twitter.com/akaasjager)
 - John Haley
 - Daniel Paulus
@@ -199,6 +196,11 @@ Licensed under the [creative commons](http://creativecommons.org/licenses/by-nd/
 - Aniket Surwade
 - Thiago Luiz Dimbarre
 - Harshant Sharma
+- Lucas Luitjes
 - Semen Rozhkov
 - Mehtab Zafar 
 - Daniel Spilsbury
+- Akash M
+- Tess Sluijter
+- Xavier Rene-Corail
+- David Wheeler

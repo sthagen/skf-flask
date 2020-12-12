@@ -10,10 +10,10 @@ metadata:
 spec:
   tls:
   - hosts:
-    - #your hostname e.g. skf.example.com
-    secretName: #your hostname e.g. skf.example.com
+    - beta.securityknowledgeframework.org
+    secretName: beta.securityknowledgeframework.org
   rules:
-  - host: #your hostname e.g. skf.example.com
+  - host: beta.securityknowledgeframework.org
     http:
      paths:
      - backend:

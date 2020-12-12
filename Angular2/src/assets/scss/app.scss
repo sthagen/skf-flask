@@ -1,0 +1,48 @@
+
+//Fonts
+@import "custom/fonts/fonts";
+
+//Core files
+@import "./node_modules/bootstrap/scss/functions";
+@import "./node_modules/bootstrap/scss/variables";
+@import "variables-light";
+@import "bootstrap";
+@import "./node_modules/bootstrap/scss/mixins.scss";
+@import './node_modules/angular-archwizard/archwizard.scss';
+@import "~@ng-select/ng-select/scss/default.theme.scss";
+//@import "~@ng-select/ng-select/scss/ant.default.theme.scss";
+
+
+// Structure
+@import "custom/structure/general";
+@import "custom/structure/topbar";
+@import "custom/structure/page-head";
+@import "custom/structure/horizontal-nav";
+@import "custom/structure/footer";
+
+// Pages
+@import "custom/pages/users";
+@import "custom/pages/read";
+@import "custom/pages/projects";
+@import "custom/pages/home";
+@import "custom/pages/custom";
+@import "custom/pages/code";
+@import "custom/pages/search";
+
+
+// Components
+@import "custom/components/card";
+@import "custom/components/buttons";
+
+
+// Code examples highlight
+@import  "./highlight.js/scss/github.scss";
+
+
+.badge {
+    color: #ffffff;
+  }
+
+.loading {
+  color: #ffffff;
+}

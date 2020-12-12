@@ -1,0 +1,59 @@
+
+//Fonts
+@import "custom/fonts/fonts";
+
+//Core files
+@import "./node_modules/bootstrap/scss/functions";
+@import "./node_modules/bootstrap/scss/variables";
+@import "variables-dark";
+@import "bootstrap-dark";
+@import "./node_modules/bootstrap/scss/mixins.scss";
+@import "~@ng-select/ng-select/scss/default.theme.scss";
+
+// Components
+@import "custom/components/card";
+@import "custom/components/dropdown";
+@import "custom/components/buttons";
+
+// Structure
+@import "custom/structure/general";
+@import "custom/structure/topbar";
+@import "custom/structure/page-head";
+@import "custom/structure/horizontal-nav";
+@import "custom/structure/footer";
+
+// Pages
+@import "custom/pages/users";
+@import "custom/pages/read";
+@import "custom/pages/projects";
+@import "custom/pages/home";
+@import "custom/pages/custom-dark";
+@import "custom/pages/code";
+@import "custom/pages/search";
+
+// Code examples highlight
+@import  "./highlight.js/styles/monokai-sublime.css";
+
+// custom scss
+//  form wizard
+aw-wizard {
+    .steps-indicator{
+        .label {
+            color: $text-muted !important;
+        }
+        .current {
+            .step-indicator{
+                color: $primary !important;
+                border-color: $primary !important;
+            }
+        }
+    }
+}
+
+.badge {
+    color: #000000;
+  }
+
+  .logo {
+    color: #ffffff;
+  }

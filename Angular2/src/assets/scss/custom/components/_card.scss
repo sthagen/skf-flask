@@ -1,0 +1,27 @@
+// 
+// _card.scss
+// 
+
+.card {
+  box-shadow: $box-shadow-sm;
+  background-color: $card-bg;
+}
+
+.card-light {
+  background-color: $topbar-search-bg;
+}
+
+.card-drop {
+  color: $body-color;
+}
+
+.card-title {
+  font-size: 15px;
+  margin: 0 0 7px 0;
+  font-weight: $font-weight-semibold;
+}
+
+.card-title-desc {
+  color: $card-title-desc;
+  margin-bottom: 24px;  
+}

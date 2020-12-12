@@ -11,9 +11,6 @@ from skf.api.chatbot.scripts import entity_classifier2
 from skf.api.chatbot.scripts import code_classify
 from skf.api.chatbot.scripts import web_scraping
 
-nltk.download('stopwords')
-nltk.download('punkt')
-
 app = Flask(__name__)
 
 def des_sol(question,intent):
@@ -58,6 +55,7 @@ def des_sol(question,intent):
                     log.write(question+"\n")
                     log.close()
                 return msg
+
 
 def code(question,intent,language):
         code_entity=code_classify.entity(question)

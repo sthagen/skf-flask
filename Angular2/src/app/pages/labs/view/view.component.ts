@@ -18,6 +18,7 @@ export class LabViewComponent implements OnInit
   // bread crumb items
   breadCrumbItems: Array<{}>;
 
+  public isCollapsed: boolean[] = [];
   public labData: any = [];
   public queryString;
   public queryLabel;
@@ -25,7 +26,18 @@ export class LabViewComponent implements OnInit
   public labLists: string[];
   public lab: any = [];
   public status: any = [];
+  public codeLabsData: any = [];
+  public catSelector: number;
+  public categoryData = ['php', 'java', 'asp', 'python'];
+  public lab_code_answer: any = [];
+  public lab_code_status: any = [];
+  public lab_code_example: any = [];
+
   public kubernetes_enabled = environment.KUBERNETES_ENABLED;
+  public loggedinUser: string;
+  public loggedin = false;
+
+  public codeDataTest: any = [];
 
   // tslint:disable-next-line: variable-name
   constructor(
@@ -40,6 +52,9 @@ export class LabViewComponent implements OnInit
     this.breadCrumbItems = [{ label: 'Labs' }, { label: 'View', active: true }];
     this._fetchData();
     this.labLists = ['SKF-Labs', 'Juice-Shop', 'Other Labs'];
+
+    // TEST VAR FOR STYLING ONLY CAN BE REMOVED LATER
+    this.codeDataTest = '    <?php\r    $cmd = $_GET["cmd"];\r    $result = system($_GET["cmd"]);\r    print $result;\r    ?>';
   }
 
   /**
@@ -55,6 +70,24 @@ export class LabViewComponent implements OnInit
         this.labData = lab;
         this.spinner.hide();
       });
+  }
+
+    /**
+   * Labs code data fetches
+   */
+  private _fetchCodeLabs(categoryCodeLang)
+  {
+    this.spinner.show();
+    this._labService
+      .getLabs()
+      .subscribe(lab =>
+      {
+        this.labData = lab;
+        this.spinner.hide();
+      });
+    this._labService
+    .getCodeLabs(categoryCodeLang)
+    .subscribe(data => this.codeLabsData = data);
   }
 
   showStatus()
@@ -124,4 +157,41 @@ export class LabViewComponent implements OnInit
       ]);
     })
   }
+
+
+  loggedIn()
+  {
+    this.loggedinUser = sessionStorage.getItem('Authorization');
+    this.loggedin = true;
+    return this.loggedinUser;
+  }
+
+
+  setCategorySelectorLang(categoryCodeLang: String = 'php')
+  {
+    localStorage.setItem('codeReviewLanguage', categoryCodeLang.toString());
+    this._fetchCodeLabs(categoryCodeLang);
+  }
+
+  answer_question(code_id: number, solution_id: number)
+  {
+    this._labService
+    .solveCodeReviewChallenge(code_id, solution_id)
+    .subscribe(data => console.log(data));
+  }
+
+  answer_fail()
+  {
+    this.lab_code_status = false;
+    this.lab_code_answer = "It was a CMD injection combined with a Secret Unicorn \r Sometimes developers while creating code invoke a secret unicorn \r this is the reason they exist in old fory stories but people are not able to spot them.";
+    this.lab_code_example = '    <?php\r    $cmd = $_GET["cmd"];\r    $escaped_command = escapeshellcmd($_GET["cmd"]);\r    $result = system($escaped_command);\r    print $result;\r    ?>';
+  }
+  
+  answer_success()
+  {
+    this.lab_code_status = true;
+    this.lab_code_answer = "It was a CMD injection combined with a Secret Unicorn \r Sometimes developers while creating code invoke a secret unicorn \r this is the reason they exist in old fory stories but people are not able to spot them.";
+    this.lab_code_example = '    <?php\r    $cmd = $_GET["cmd"];\r    $escaped_command = escapeshellcmd($_GET["cmd"]);\r    $result = system($escaped_command);\r    print $result;\r    ?>'; 
+  }
+
 }

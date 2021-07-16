@@ -2,11 +2,10 @@
 
 # -*- coding: utf-8 -*-
 """
-    sadasdasdasdas
     Security Knowledge Framework is an expert system application
     that uses OWASP Application Security Verification Standard, code examples
     and helps developers in development.
-    Copyright (C) 2020 Glenn ten Cate, Riccardo ten Cate
+    Copyright (C) 2021 Glenn ten Cate, Riccardo ten Cate
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Affero General Public License as
     published by the Free Software Foundation, either version 3 of the
@@ -28,6 +27,8 @@ from skf.db_tools import init_md_knowledge_base, init_md_code_examples, load_ini
 from skf.api.labs.endpoints.lab_items import ns as lab_namespace
 from skf.api.labs.endpoints.lab_deployments import ns as lab_namespace
 from skf.api.labs.endpoints.lab_delete import ns as lab_namespace
+from skf.api.labs_code.endpoints.lab_code_random_item import ns as lab_code_namespace
+from skf.api.labs_code.endpoints.lab_code_verify_answer import ns as lab_code_namespace
 from skf.api.projects.endpoints.project_items import ns as project_namespace
 from skf.api.projects.endpoints.project_delete import ns as project_namespace
 from skf.api.projects.endpoints.project_new import ns as project_namespace
@@ -63,7 +64,7 @@ from skf.api.checklist_category.endpoints.checklist_category_delete import ns as
 from skf.api.checklist_category.endpoints.checklist_category_items import ns as checklist_category
 from skf.api.checklist_category.endpoints.checklist_category_item import ns as checklist_category
 from skf.api.checklist_category.endpoints.checklist_category_update import ns as checklist_category
-from skf.api.chatbot.endpoints.chatbot_question import ns as chatbot_namespace
+#from skf.api.chatbot.endpoints.chatbot_question import ns as chatbot_namespace
 from skf.api.code.endpoints.code_item import ns as code_namespace
 from skf.api.code.endpoints.code_items import ns as code_namespace
 from skf.api.code.endpoints.code_items_new import ns as code_namespace
@@ -95,6 +96,7 @@ from skf.api.search.endpoints.search_lab import ns as search_namespace
 from skf.api.search.endpoints.search_code import ns as search_namespace
 from skf.api.search.endpoints.search_checklist import ns as search_namespace
 from skf.api.search.endpoints.search_project import ns as search_namespace
+from elasticapm.contrib.flask import ElasticAPM
 
 
 from skf.api.restplus import api
@@ -126,12 +128,23 @@ def configure_app(flask_app):
     #flask_app.config['RABBIT_MQ_CONN_STRING'] = settings.RABBIT_MQ_CONN_STRING
     #flask_app.config['RABBIT_MQ_DEPLOYMENT_WORKER'] = settings.RABBIT_MQ_DEPLOYMENT_WORKER
     #flask_app.config['RABBIT_MQ_DELETION_WORKER'] = settings.RABBIT_MQ_DELETION_WORKER
+    flask_app.config['ELASTIC_APM'] = {
+        # Set required service name. Allowed characters:
+        # a-z, A-Z, 0-9, -, _, and space
+        'SERVICE_NAME': 'skf-flask',
+        # Use if APM Server requires a token
+        'SECRET_TOKEN': '123',
+        # Set custom APM Server URL (default: http://localhost:8200)
+        'SERVER_URL': 'https://123.apm.us-central1.gcp.cloud.es.io:443',
+        'CAPTURE_BODY': 'all',
+    }
 
 def initialize_app(flask_app):
     """Initialize the SKF app."""
     blueprint = Blueprint('api', __name__, url_prefix='/api')
     api.init_app(blueprint)
     api.add_namespace(lab_namespace)
+    api.add_namespace(lab_code_namespace)
     api.add_namespace(kb_namespace)
     api.add_namespace(code_namespace)
     api.add_namespace(users_namespace)
@@ -139,12 +152,14 @@ def initialize_app(flask_app):
     api.add_namespace(sprints_namespace)
     api.add_namespace(checklist_namespace)
     api.add_namespace(checklist_category)
-    api.add_namespace(chatbot_namespace)
+    #api.add_namespace(chatbot_namespace)
     api.add_namespace(questions_namespace)
     api.add_namespace(search_namespace)
     flask_app.register_blueprint(blueprint)
 
 app = create_app()
+#apm = ElasticAPM(app)
+
 # TO DO FIX WILDCARD ONLY ALLOW NOW FOR DEV
 cors = CORS(app, resources={r"/api/*": {"origins": settings.ORIGINS}})
 logging.config.fileConfig('logging.conf')

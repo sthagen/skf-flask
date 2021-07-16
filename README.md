@@ -1,19 +1,19 @@
 # OWASP Security Knowledge Framework
-[![SKF Logo](https://www.securityknowledgeframework.org/img/banner-wiki-owasp.jpg)](https://www.securityknowledgeframework.org/) 
+[![SKF Logo](https://github.com/blabla1337/skf-www/blob/master/images/site-skf/logo_github.png?raw=true)](https://www.securityknowledgeframework.org/) 
 
 <br>Project status details:<br>
+[![Build Travis CI main](https://travis-ci.org/blabla1337/skf-flask.svg?branch=main)](https://travis-ci.org/blabla1337/skf-flask)
 [![Join the chat at https://gitter.im/Security-Knowledge-Framework/Lobby](https://badges.gitter.im/Security-Knowledge-Framework/Lobby.svg)](https://gitter.im/Security-Knowledge-Framework/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Join the chat at https://owasp.slack.com/messages/C0F7L9X6V](https://img.shields.io/badge/chat-on%20slack-blueviolet)](https://owasp.slack.com/messages/C0F7L9X6V)
 [![OWASP Flagship](https://img.shields.io/badge/owasp-flagship%20project-orange.svg)](https://www.owasp.org/index.php/OWASP_Security_Knowledge_Framework)
-[![OSSF Working group: Best Practices for Open Source Developers](https://img.shields.io/badge/OpenSSF-Learning%20Platform-orange)](https://openssf.org)
+[![OSSF Working group: Best Practices for Open Source Developers](https://img.shields.io/badge/openssf-Learning%20Platform%20Project-orange.svg)](https://openssf.org)
 
 <br>Quality testing:<br>
-[![Build Travis CI Master](https://travis-ci.org/blabla1337/skf-flask.svg?branch=main)](https://travis-ci.org/blabla1337/skf-flask)
-[![Known Vulnerabilities](https://snyk.io/test/github/blabla1337/skf-flask/badge.svg?branch=main)](https://snyk.io/test/github/blabla1337/skf-flask?branch=main)
-[![Coverage Status](https://coveralls.io/repos/github/blabla1337/skf-flask/badge.svg?branch=master)](https://coveralls.io/github/blabla1337/skf-flask?branch=master)
+[![Known Vulnerabilities](https://snyk.io/test/github/blabla1337/skf-flask/badge.svg)](https://snyk.io/test/github/blabla1337/skf-flask)
+[![Coverage Status](https://coveralls.io/repos/blabla1337/skf-flask/badge.svg?branch=main)](https://coveralls.io/repos/blabla1337/skf-flask/badge.svg?branch=main)
 [![Requirements Status](https://requires.io/github/blabla1337/skf-flask/requirements.svg?branch=main)](https://requires.io/github/blabla1337/skf-flask/requirements/?branch=main)
 
-Security Knowledge Framework is an expert system application that uses the OWASP Application Security Verification Standard with detailed code examples (secure coding principles) to help developers in pre-development and post-development phases and create applications that are secure by design.
+The OWASP Security Knowledge Framework is an open source web application that explains secure coding principles in multiple programming languages. The goal of OWASP-SKF is to help you learn and integrate security by design in your software development and build applications that are secure by design. OWASP-SKF does this through manageable software development projects with checklists (using OWASP-ASVS/OWASP-MASVS  or custom security checklists) and labs to practice security verification (using SKF-Labs, OWASP Juice-shop, and best practice code examples from SKF and the OWASP-Cheatsheets).
 
 ## Table of Contents
 * [Introduction](#introduction)
@@ -22,7 +22,8 @@ Security Knowledge Framework is an expert system application that uses the OWASP
 * [Updating Chatbot](#updating-dataset)
 * [Usage](#usage)
 * [CI-Pipeline](#ci-pipeline)
-* [Development / Contributing](https://github.com/blabla1337/skf-flask/blob/master/CONTRIBUTING.md)
+* [Development / Contributing](https://github.com/blabla1337/skf-flask/blob/main/CONTRIBUTING.md)
+* [Scrum Board](#scrum-board)
 * [License](#license)
 * [Contributors](#contributors)
 
@@ -32,16 +33,16 @@ Our experience taught us that the current level of security of web-applications 
 
 Because of this we decided to develop a framework in order to create a guide-system available for all developers so they can develop applications secure by design from the start.
 
-The OWASP Security Knowledge Framework is here to support developers in creating secure applications. By using the [OWASP Application Security Verification Standards.](https://www.owasp.org/index.php/Category:OWASP_Application_Security_Verification_Standard_Project) as a security requirement and give the developer feedback regarding descriptions and solutions on how to properly implement these security controls in a safe manner.
+[![SKF Features](https://raw.githubusercontent.com/blabla1337/skf-www/master/images/site-skf/skf_features.png)](https://www.securityknowledgeframework.org/) 
 
-The second stage is validating if the developer properly implemented different security controls and the belonging defence mechanisms by means of checklists created with the [OWASP Application Security Verification Standards.](https://www.owasp.org/index.php/Category:OWASP_Application_Security_Verification_Standard_Project) By means of the answers supplied by the developer the application again generates documentation in which it gives feedback on what defence mechanisms the developer forgot to implement and gives him feedback regarding descriptions and solutions on how to properly implement these techniques in a safe manner.
+[![SKF Flow](https://raw.githubusercontent.com/blabla1337/skf-www/master/images/site-skf/skf_flow.gif)](https://www.securityknowledgeframework.org/) 
 
 ## <a name="installing"></a>Installing
 
-### [Kubernetes installation how to](https://github.com/blabla1337/skf-flask/tree/master/installations/Kubernetes)  
-### [Bare metal / on premise installation how to](https://github.com/blabla1337/skf-flask/tree/master/installations/local)  
-### [Docker-compose local how to](https://github.com/blabla1337/skf-flask/tree/master/installations/docker)  
-### [SKF K8s Raspberry pi cluster how to](https://github.com/blabla1337/skf-flask/tree/master/installations/pi-cluster)  
+### [Kubernetes installation how to](https://github.com/blabla1337/skf-flask/tree/main/installations/Kubernetes)  
+### [Bare metal / on premise installation how to](https://github.com/blabla1337/skf-flask/tree/main/installations/local)  
+### [Docker-compose local how to](https://github.com/blabla1337/skf-flask/tree/main/installations/docker)  
+### [SKF K8s Raspberry pi cluster how to](https://github.com/blabla1337/skf-flask/tree/main/installations/pi-cluster)  
 ### [SKF Chatbot installation how to](https://github.com/blabla1337/skf-bot)  
 
 ## <a name="updating-db"></a>Updating Database
@@ -95,26 +96,12 @@ SKF codecov details:
 ```
 https://codecov.io/gh/blabla1337/skf-flask
 
-### Bithound.io NPM packages:
-```
-BitHound provides your Node team with comprehensive and prioritized issues in your code and npm packages.
-SKF Bithound details:
-```
-https://www.bithound.io/github/blabla1337/skf-flask
-
 ### Requires.io pip packages:
 ```
 Stay Up-to-date! Stay secure! Requires.io monitors your Python projects dependencies, and notify you whenever any of your dependency is out-of-date.
 SKF Requires details:
 ```
 https://requires.io/github/blabla1337/skf-flask/requirements/
-
-### Black Duck Security Risk:
-```
-Announcing Black Duck CoPilot, a new service helping open source project teams catalog and report on their project's dependencies.
-SKF Requires details:
-```
-https://copilot.blackducksoftware.com/github/groups/blabla1337/locations/skf-flask/public/results
 
 ### uptimerobot.com:
 ```
@@ -133,7 +120,7 @@ Creates a nice badge for your website SSL/TLS security settings based on the Qua
 
 
 ## <a name="license"></a>License
-    Copyright (C) 2020  Glenn ten Cate, Riccardo ten Cate
+    Copyright (C) 2021  Glenn ten Cate, Riccardo ten Cate
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Affero General Public License as
@@ -156,6 +143,7 @@ Licensed under the [creative commons](http://creativecommons.org/licenses/by-nd/
 ## <a name="contributors"></a>Contributors
 - [Glenn ten Cate](https://twitter.com/FooBar_testing_)
 - [Riccardo ten Cate](https://twitter.com/RiieCco)
+- Lucas Luitjes
 - [Mattijs van Ommeren](https://twitter.com/alcyonsecurity)
 - [Alexander Kaasjager](https://twitter.com/akaasjager)
 - John Haley
@@ -196,11 +184,9 @@ Licensed under the [creative commons](http://creativecommons.org/licenses/by-nd/
 - Aniket Surwade
 - Thiago Luiz Dimbarre
 - Harshant Sharma
-- Lucas Luitjes
 - Semen Rozhkov
 - Mehtab Zafar 
 - Daniel Spilsbury
 - Akash M
 - Tess Sluijter
 - Xavier Rene-Corail
-- David Wheeler

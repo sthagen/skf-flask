@@ -5,6 +5,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { AuthService } from '../../../core/services/auth.service';
 import { environment } from 'src/environments/environment';
+declare const eSheep: any;
+
+
 
 @Component({ templateUrl: 'login.component.html' })
 export class LoginComponent implements OnInit
@@ -99,5 +102,17 @@ export class LoginComponent implements OnInit
     onRegister()
     {
         this.router.navigate(['/auth/register']);
+    }
+
+    doBackdoor()
+    {
+        //eval()
+        //system()
+        //exec()
+        //Nice i see you did some nice code reviewing to validate if the app is secure and doesn't contain backdoors?
+        //Then You are freaking awesome! Please enjoy this little Easter-Egg for the hard word and good ethics!
+        var pet = new eSheep();
+        pet.Start();
+        //Thanks to Adriano Petrucci (http://esheep.petrucci.ch) who created this little sheep.exe
     }
 }
